@@ -7,7 +7,7 @@ import sympy
 # h = 3
 
 def errortrue(f_value, y_values):
-    return abs((f_value-y_values)/f_value)
+    return abs(((f_value-y_values)/f_value)*100)
 
 def heun_method (f, x0, x3, h):
     x = sympy.symbols('x')
@@ -22,23 +22,23 @@ def heun_method (f, x0, x3, h):
         f_derivative_value = f_derivative.subs(x, xn)
         f_derivative_valueup = f_derivative.subs(x, xn+h)
         if(i == 0 ):
-            print(f"Step 1:\nx0 = {xn}\ty0 = {f_value}\n")
+            print(f"Step 1:\nx0 = {xn:.2f}\ty0 = {f_value:.2f}\n")
             #print(f"{f_derivative_value}")
             #print(f"{f_derivative_valueup}")
             #print(f"{f_value}")
 
             y_values = f_value + (((f_derivative_value+f_derivative_valueup)/2)*h)
             xn = xn + h
-            print(f"x0 = {xn}\ty1 = {y_values}\n")
+            print(f"x0 = {xn:.2f}\ty1 = {y_values:.2f}\n")
             error = round(errortrue(f_valueup, y_values), 2)
-            print(f"\t\tEt = {error}")
+            print(f"\t\tEt = {error:.2f}%")
             continue
         y_values = y_values + (((f_derivative_value+f_derivative_valueup)/2)*h)
         xn = xn + h
-        print(f"Step {i+1}:\nx0 = {xn}\ty1 = {y_values}\n")
+        print(f"Step {i+1}:\nx0 = {xn:.2f}\ty1 = {y_values:.2f}\n")
         #print(f"{f_value}")
         error = round(errortrue(f_valueup, y_values), 2)
-        print(f"\t\tEt = {error}")
+        print(f"\t\tEt = {error:.2f}%")
 
 
     
